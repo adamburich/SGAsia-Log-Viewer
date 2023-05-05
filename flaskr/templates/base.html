@@ -1,157 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/simple_styles.css') }}">
+    <script type="text/javascript" src="{{ url_for('static',filename='node_modules/@pgrabovets/json-view/dist/jsonview.js') }}"></script>
+    <script>
+        fetch('{{ url_for('static',filename='sample.json') }}')
+        .then((res)=> {
+          return res.text();
+        })
+        .then((data) => {
+          const tree = jsonview.create(data);
+          jsonview.render(tree, document.querySelector('.root'));
+          //jsonview.expand(tree);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    </script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div id="root-container">
-    <div id="form-container">
-        <div id="log-info">
-            <div class="container-fluid px-1 py-5 mx-auto">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-                        <h3>Request a Demo</h3>
-                        <p class="blue-text">Just answer a few questions<br> so that we can personalize the right
-                            experience for you.</p>
-                        <div class="card">
-                            <h5 class="text-center mb-4">Powering world-class companies</h5>
-                            <form class="form-card" onsubmit="event.preventDefault()">
-                                <div class="row justify-content-between text-left">
-                                    <div class="form-group col-sm-6 flex-column d-flex"><label
-                                            class="form-control-label px-3">First name<span
-                                            class="text-danger"> *</span></label> <input type="text" id="fname"
-                                                                                         name="fname"
-                                                                                         placeholder="Enter your first name"
-                                                                                         onblur="validate(1)"></div>
-                                    <div class="form-group col-sm-6 flex-column d-flex"><label
-                                            class="form-control-label px-3">Last name<span class="text-danger"> *</span></label>
-                                        <input type="text" id="lname" name="lname" placeholder="Enter your last name"
-                                               onblur="validate(2)"></div>
-                                </div>
-                                <div class="row justify-content-between text-left">
-                                    <div class="form-group col-sm-6 flex-column d-flex"><label
-                                            class="form-control-label px-3">Business email<span
-                                            class="text-danger"> *</span></label> <input type="text" id="email"
-                                                                                         name="email" placeholder=""
-                                                                                         onblur="validate(3)"></div>
-                                    <div class="form-group col-sm-6 flex-column d-flex"><label
-                                            class="form-control-label px-3">Phone number<span
-                                            class="text-danger"> *</span></label> <input type="text" id="mob" name="mob"
-                                                                                         placeholder=""
-                                                                                         onblur="validate(4)"></div>
-                                </div>
-                                <div class="row justify-content-between text-left">
-                                    <div class="form-group col-sm-6 flex-column d-flex"><label
-                                            class="form-control-label px-3">Job title<span class="text-danger"> *</span></label>
-                                        <input type="text" id="job" name="job" placeholder="" onblur="validate(5)">
-                                    </div>
-                                </div>
-                                <div class="row justify-content-between text-left">
-                                    <div class="form-group col-12 flex-column d-flex"><label
-                                            class="form-control-label px-3">What would you be using Flinks for?<span
-                                            class="text-danger"> *</span></label> <input type="text" id="ans" name="ans"
-                                                                                         placeholder=""
-                                                                                         onblur="validate(6)"></div>
-                                </div>
-                                <div class="row justify-content-end">
-                                    <div class="form-group col-sm-6">
-                                        <button type="submit" class="btn-block btn-primary">Request a demo</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="root-container">
+    <div class="quarter-container">
+        <div style="margin-left:10%; margin-top:75px;">
+            <h3>MongoDB Query:</h3>
+            <textarea style="height:25vh; width:80%;"></textarea>
+            <br><br>
+            <button>Send Query</button>
         </div>
     </div>
-    <div id="results-view-container">
-        <div id="log-results" class="container d-flex justify-content-center">
-            <ul class="list-group mt-5 text-white">
-                <li class="list-group-item d-flex justify-content-between align-content-center">
 
-                    <div class="d-flex flex-row">
-                        <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40"/>
-                        <div class="ml-2">
-                            <h6 class="mb-0 entry-head">Ogivet Maither</h6>
-                            <div class="about">
-                                <span>22 Files</span>
-                                <span>Jan 21, 2020</span>
-                            </div>
-                        </div>
-                    </div>
+    <div class="quarter-container">
+        <div style="margin-left:10%; margin-top:75px;">
+            <h3>Metadata JSON:</h3>
+            <textarea style="height:25vh; width:80%;"></textarea>
+            <br><br>
+            <button>Apply Metadata Filter</button>
+        </div>
+    </div>
 
-                </li>
+    <div class="quarter-container" style="overflow-y:scroll;">
+        <div style="margin-left:10%; margin-top:75px;">
+            <h3>Query Results:</h3>
+            <div class="root"></div>
+        </div>
+    </div>
 
-                <li class="list-group-item d-flex justify-content-between align-content-center">
-
-                    <div class="d-flex flex-row">
-                        <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40"/>
-                        <div class="ml-2">
-                            <h6 class="mb-0 entry-head">Macan Worldgroup</h6>
-                            <div class="about">
-                                <span>62 Files</span>
-                                <span>Jan 22, 2020</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-content-center">
-
-                    <div class="d-flex flex-row">
-                        <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40"/>
-                        <div class="ml-2">
-                            <h6 class="mb-0 entry-head">Organ parts</h6>
-                            <div class="about">
-                                <span>82 Files</span>
-                                <span>Jan 29, 2020</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-content-center">
-
-                    <div class="d-flex flex-row">
-                        <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40"/>
-                        <div class="ml-2">
-                            <h6 class="mb-0 entry-head">Engine parts</h6>
-                            <div class="about">
-                                <span>182 Files</span>
-                                <span>Jan 29, 2020</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </li>
-
-                <li class="list-group-item d-flex justify-content-between align-content-center">
-
-                    <div class="d-flex flex-row">
-                        <img src="https://img.icons8.com/color/100/000000/folder-invoices.png" width="40"/>
-                        <div class="ml-2">
-                            <h6 class="mb-0 entry-head">Turbine parts</h6>
-                            <div class="about">
-                                <span>802 Files</span>
-                                <span>Jan 29, 2020</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </li>
-
-
-            </ul>
+    <div class="quarter-container">
+        <div style="margin-left:10%; margin-top:75px;">
+            <h3>Logs Required By Metadata:</h3>
         </div>
     </div>
 </div>

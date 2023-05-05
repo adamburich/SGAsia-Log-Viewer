@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root-container">
+    <div id="form-container">
+        <div id="log-info">
+            <div class="container-fluid px-1 py-5 mx-auto">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                        <h3>Setup Search Criteria</h3>
+                        <p class="blue-text">Fill out one or more fields<br> Logs matching your input criteria will be displayed on the right</p>
+                        <div class="card">
+                            <h5 class="text-center mb-4">Search For:</h5>
+                            <form class="form-card" onsubmit="event.preventDefault()">
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex"><label
+                                            class="form-control-label px-3">Learner Name<span
+                                            class="text-danger"> </span></label> <input type="text" id="fname"
+                                                                                         name="fname"
+                                                                                         placeholder=""
+                                                                                         onblur="validate(1)"></div>
+                                    <div class="form-group col-sm-6 flex-column d-flex"><label
+                                            class="form-control-label px-3">Learner ID<span class="text-danger"> </span></label>
+                                        <input type="text" id="lname" name="lname" placeholder=""
+                                               onblur="validate(2)"></div>
+                                </div>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex"><label
+                                            class="form-control-label px-3">Date<span
+                                            class="text-danger"> *</span></label> <input type="text" id="email"
+                                                                                         name="email" placeholder=""
+                                                                                         onblur="validate(3)"></div>
+                                    <div class="form-group col-sm-6 flex-column d-flex"><label
+                                            class="form-control-label px-3">Game/Activity<span
+                                            class="text-danger"> </span></label> <input type="text" id="mob" name="mob"
+                                                                                         placeholder=""
+                                                                                         onblur="validate(4)"></div>
+                                </div>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex"><label
+                                            class="form-control-label px-3">Action Verb<span class="text-danger"> </span></label>
+                                        <input type="text" id="job" name="job" placeholder="" onblur="validate(5)">
+                                    </div>
+                                </div>
+                                <div id="search-criteria-submit" class="row justify-content-end">
+                                    <div class="form-group col-sm-6">
+                                        <button type="submit" class="btn-block btn-primary">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="results-view-container">
+        <div id="log-result-header" class="container-fluid mx-auto">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                        <h3>5 Log Entries Match Your Search Criteria</h3>
+                    </div>
+                </div>
+        </div>
+        <div id="log-results" class="container d-flex justify-content-center">
+            <ul class="list-group mt-5 text-white">
+                <li class="list-group-item d-flex justify-content-between align-content-center">
+
+                    <div class="d-flex flex-row">
+                        <img src="https://img.icons8.com/?size=512&id=pvMmIo3ZCmFe&format=png" width="40"/>
+                        <div class="ml-2">
+                            <h6 class="mb-0 entry-head">NEWS - Jan 21, 2020</h6>
+                            <div class="about">
+                                <span>acb426</span>
+                                <span>Click to Expand and Show JSON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-content-center">
+
+                    <div class="d-flex flex-row">
+                        <img src="https://img.icons8.com/?size=512&id=pvMmIo3ZCmFe&format=png" width="40"/>
+                        <div class="ml-2">
+                            <h6 class="mb-0 entry-head">NEWS - Jan 21, 2020</h6>
+                            <div class="about">
+                                <span>acb426</span>
+                                <span>Click to Expand and Show JSON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-content-center">
+
+                    <div class="d-flex flex-row">
+                        <img src="https://img.icons8.com/?size=512&id=pvMmIo3ZCmFe&format=png" width="40"/>
+                        <div class="ml-2">
+                            <h6 class="mb-0 entry-head">UCG - Jan 21, 2020</h6>
+                            <div class="about">
+                                <span>acb426</span>
+                                <span>Click to Expand and Show JSON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-content-center">
+
+                    <div class="d-flex flex-row">
+                        <img src="https://img.icons8.com/?size=512&id=pvMmIo3ZCmFe&format=png" width="40"/>
+                        <div class="ml-2">
+                            <h6 class="mb-0 entry-head">UCG - Jan 21, 2020</h6>
+                            <div class="about">
+                                <span>acb426</span>
+                                <span>Click to Expand and Show JSON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-content-center">
+
+                    <div class="d-flex flex-row">
+                        <img src="https://img.icons8.com/?size=512&id=pvMmIo3ZCmFe&format=png" width="40"/>
+                        <div class="ml-2">
+                            <h6 class="mb-0 entry-head">UCG - Jan 21, 2020</h6>
+                            <div class="about">
+                                <span>acb426</span>
+                                <span>Click to Expand and Show JSON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

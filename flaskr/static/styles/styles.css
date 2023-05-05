@@ -10,6 +10,11 @@
     max-width:50%;
     width:50%;
     height:100%;
+    margin-top:2%;
+}
+
+#search-criteria-submit{
+    margin-top:20px;
 }
 
 #results-view-container{
@@ -19,10 +24,13 @@
     height:100%;
 }
 
+#log-result-header{
+    margin-top:12.5%;
+}
+
 #log-results{
     padding-left:25%;
     padding-right:25%;
-    padding-top:10%;
 }
 
 .list-group{
