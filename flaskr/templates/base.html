@@ -49,7 +49,46 @@
 
     <div class="quarter-container">
         <div style="margin-left:10%; margin-top:75px;">
-            <h3>Logs Required By Metadata:</h3>
+            <!--
+                1.	StartGame(string game_id): when called, assign a game session (using uuid), also create <”started”, “game”> log
+                2.	EndGame()
+                3.	StartStage(string stage_id)
+                4.	EndStage()
+                5.	StartActivity(string activity_id)
+                6.	EndActivity()
+                7.	PerformedAction(string activity_id, and other args)
+            -->
+            <h3>Logs Available By Metadata:</h3>
+            <ul id="metadata_log_type_options">
+                <!--
+                    - include an onChange() so that when we check or uncheck something LogFilterBySelection.filter()
+                      is called.  LogFilterBySelection.filter() should also call LogFilterBySelection.getSelections()
+
+                    - Also need to turn these into checkboxes, we should populate the list of available checkboxes
+                      according to the MetaData input from C3
+                -->
+                <li id="StartGame">
+                    StartGame()
+                </li>
+                <li id="EndGame">
+                    EndGame()
+                </li>
+                <li id="StartStage">
+                    StartStage()
+                </li>
+                <li id="EndStage">
+                    EndStage()
+                </li>
+                <li id="StartActivity">
+                    StartActivity()
+                </li>
+                <li id="EndActivity">
+                    EndActivity() | SubmitActivity()
+                </li>
+                <li id="PerformedAction">
+                    PerformedAction()
+                </li>
+            </ul>
         </div>
     </div>
 </div>
