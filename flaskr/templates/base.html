@@ -3,14 +3,17 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/simple_styles.css') }}">
     <script type="text/javascript" src="{{ url_for('static',filename='node_modules/@pgrabovets/json-view/dist/jsonview.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='script/HandleMetaData.js') }}"></script>
     <script>
+
         fetch('{{ url_for('static',filename='sample.json') }}')
         .then((res)=> {
           return res.text();
         })
         .then((data) => {
+          document.getElementById("hidden_log_div").innerHTML = data;
           const tree = jsonview.create(data);
-          jsonview.render(tree, document.querySelector('.root'));
+          jsonview.render(tree, document.querySelector('.query-result-root'));
           //jsonview.expand(tree);
         })
         .catch((err) => {
@@ -34,20 +37,21 @@
     <div class="quarter-container">
         <div style="margin-left:10%; margin-top:75px;">
             <h3>Metadata JSON:</h3>
-            <textarea style="height:25vh; width:80%;"></textarea>
+            <textarea id="metadata_input" style="height:25vh; width:80%;"></textarea>
             <br><br>
-            <button>Apply Metadata Filter</button>
+            <button onclick="buildCheckList()">Apply Metadata Filter</button>
         </div>
     </div>
 
     <div class="quarter-container" style="overflow-y:scroll;">
         <div style="margin-left:10%; margin-top:75px;">
             <h3>Query Results:</h3>
-            <div class="root"></div>
+            <div id="hidden_log_div" style="display:none"></div>
+            <div id="log_output_div" class="query-result-root"></div>
         </div>
     </div>
 
-    <div class="quarter-container">
+    <div class="quarter-container" style="overflow-y:scroll;">
         <div style="margin-left:10%; margin-top:75px;">
             <!--
                 1.	StartGame(string game_id): when called, assign a game session (using uuid), also create <”started”, “game”> log
@@ -59,36 +63,57 @@
                 7.	PerformedAction(string activity_id, and other args)
             -->
             <h3>Logs Available By Metadata:</h3>
-            <ul id="metadata_log_type_options">
-                <!--
-                    - include an onChange() so that when we check or uncheck something LogFilterBySelection.filter()
-                      is called.  LogFilterBySelection.filter() should also call LogFilterBySelection.getSelections()
+            <div id="metadata_output_div" class="metadata-result-root"></div>
+<!--            <ul id="metadata_log_type_options">-->
+<!--                &lt;!&ndash;-->
+<!--                    - include an onChange() so that when we check or uncheck something LogFilterBySelection.filter()-->
+<!--                      is called.  LogFilterBySelection.filter() should also call LogFilterBySelection.getSelections()-->
 
-                    - Also need to turn these into checkboxes, we should populate the list of available checkboxes
-                      according to the MetaData input from C3
-                -->
-                <li id="StartGame" class="metadata_log_type_option">
-                    StartGame()
-                </li>
-                <li id="EndGame" class="metadata_log_type_option">
-                    EndGame()
-                </li>
-                <li id="StartStage" class="metadata_log_type_option">
-                    StartStage()
-                </li>
-                <li id="EndStage" class="metadata_log_type_option">
-                    EndStage()
-                </li>
-                <li id="StartActivity" class="metadata_log_type_option">
-                    StartActivity()
-                </li>
-                <li id="EndActivity" class="metadata_log_type_option">
-                    EndActivity() | SubmitActivity()
-                </li>
-                <li id="PerformedAction" class="metadata_log_type_option">
-                    PerformedAction()
-                </li>
-            </ul>
+<!--                    - Also need to turn these into checkboxes, we should populate the list of available checkboxes-->
+<!--                      according to the MetaData input from C3-->
+<!--                &ndash;&gt;-->
+<!--                <div id="StartGame" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="StartGame_Input" name="StartGame" value="StartGame" onclick="filter()">-->
+<!--                    <label for="StartGame_Input">StartGame</label><br>-->
+<!--                </div>-->
+
+<!--                <div id="EndGame" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="EndGame_Input" name="EndGame" value="EndGame" onclick="filter()">-->
+<!--                    <label for="EndGame_Input">EndGame</label><br>-->
+<!--                </div>-->
+
+<!--                <div id="StartStage" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="StartStage_Input" name="StartStage" value="StartStage" onclick="filter()">-->
+<!--                    <label for="StartStage_Input">StartStage</label><br>-->
+<!--                </div>-->
+
+<!--                <div id="EndStage" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="EndStage_Input" name="EndStage" value="EndStage" onclick="filter()">-->
+<!--                    <label for="EndStage_Input">EndStage</label><br>-->
+<!--                </div>-->
+
+<!--                <div id="PerformedAction" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="PerformedAction_Input" name="PerformedAction" value="PerformedAction" onclick="filter()">-->
+<!--                    <label for="PerformedAction_Input">PerformedAction</label><br>-->
+<!--                </div>-->
+
+<!--                <div id="StartActivity" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="StartActivity_Input" name="StartActivity" value="StartActivity" onclick="filter()">-->
+<!--                    <label for="StartActivity_Input">StartActivity</label><br>-->
+<!--                </div>-->
+
+<!--                <div id="EndActivity" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="EndActivity_Input" name="EndActivity" value="EndActivity" onclick="filter()">-->
+<!--                    <label for="EndActivity_Input">EndActivity</label><br>-->
+<!--                </div>-->
+
+<!--                <div id="SubmitActivity" class="metadata_log_type_option">-->
+<!--                    <input type="checkbox" id="SubmitActivity_Input" name="SubmitActivity" value="SubmitActivity" onclick="filter()">-->
+<!--                    <label for="SubmitActivity_Input">Completed</label><br>-->
+<!--                </div>-->
+
+
+<!--            </ul>-->
         </div>
     </div>
 </div>
