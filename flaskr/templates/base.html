@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/simple_styles.css') }}">
     <script type="text/javascript" src="{{ url_for('static',filename='node_modules/@pgrabovets/json-view/dist/jsonview.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static',filename='script/HandleMetaData.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='script/MongoDBQuery.js') }}"></script>
     <script>
 
         fetch('{{ url_for('static',filename='sample.json') }}')
@@ -28,9 +29,9 @@
     <div class="quarter-container">
         <div style="margin-left:10%; margin-top:75px;">
             <h3>MongoDB Query:</h3>
-            <textarea style="height:25vh; width:80%;"></textarea>
+            <textarea id="mongoQuery" style="height:25vh; width:80%;"></textarea>
             <br><br>
-            <button>Send Query</button>
+            <button onclick="sendMongoDBQuery()">Send Query</button>
         </div>
     </div>
 
@@ -53,67 +54,8 @@
 
     <div class="quarter-container" style="overflow-y:scroll;">
         <div style="margin-left:10%; margin-top:75px;">
-            <!--
-                1.	StartGame(string game_id): when called, assign a game session (using uuid), also create <”started”, “game”> log
-                2.	EndGame()
-                3.	StartStage(string stage_id)
-                4.	EndStage()
-                5.	StartActivity(string activity_id)
-                6.	EndActivity()
-                7.	PerformedAction(string activity_id, and other args)
-            -->
             <h3>Logs Available By Metadata:</h3>
             <div id="metadata_output_div" class="metadata-result-root"></div>
-<!--            <ul id="metadata_log_type_options">-->
-<!--                &lt;!&ndash;-->
-<!--                    - include an onChange() so that when we check or uncheck something LogFilterBySelection.filter()-->
-<!--                      is called.  LogFilterBySelection.filter() should also call LogFilterBySelection.getSelections()-->
-
-<!--                    - Also need to turn these into checkboxes, we should populate the list of available checkboxes-->
-<!--                      according to the MetaData input from C3-->
-<!--                &ndash;&gt;-->
-<!--                <div id="StartGame" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="StartGame_Input" name="StartGame" value="StartGame" onclick="filter()">-->
-<!--                    <label for="StartGame_Input">StartGame</label><br>-->
-<!--                </div>-->
-
-<!--                <div id="EndGame" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="EndGame_Input" name="EndGame" value="EndGame" onclick="filter()">-->
-<!--                    <label for="EndGame_Input">EndGame</label><br>-->
-<!--                </div>-->
-
-<!--                <div id="StartStage" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="StartStage_Input" name="StartStage" value="StartStage" onclick="filter()">-->
-<!--                    <label for="StartStage_Input">StartStage</label><br>-->
-<!--                </div>-->
-
-<!--                <div id="EndStage" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="EndStage_Input" name="EndStage" value="EndStage" onclick="filter()">-->
-<!--                    <label for="EndStage_Input">EndStage</label><br>-->
-<!--                </div>-->
-
-<!--                <div id="PerformedAction" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="PerformedAction_Input" name="PerformedAction" value="PerformedAction" onclick="filter()">-->
-<!--                    <label for="PerformedAction_Input">PerformedAction</label><br>-->
-<!--                </div>-->
-
-<!--                <div id="StartActivity" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="StartActivity_Input" name="StartActivity" value="StartActivity" onclick="filter()">-->
-<!--                    <label for="StartActivity_Input">StartActivity</label><br>-->
-<!--                </div>-->
-
-<!--                <div id="EndActivity" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="EndActivity_Input" name="EndActivity" value="EndActivity" onclick="filter()">-->
-<!--                    <label for="EndActivity_Input">EndActivity</label><br>-->
-<!--                </div>-->
-
-<!--                <div id="SubmitActivity" class="metadata_log_type_option">-->
-<!--                    <input type="checkbox" id="SubmitActivity_Input" name="SubmitActivity" value="SubmitActivity" onclick="filter()">-->
-<!--                    <label for="SubmitActivity_Input">Completed</label><br>-->
-<!--                </div>-->
-
-
-<!--            </ul>-->
         </div>
     </div>
 </div>
