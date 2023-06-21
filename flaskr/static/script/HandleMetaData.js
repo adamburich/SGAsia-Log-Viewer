@@ -36,6 +36,7 @@ const types = [
 function buildCheckList(){
     document.getElementById("metadata_output_div").innerHTML = "";
     let data = JSON.stringify(parseMetaData());
+    console.log(data);
 
 //    if(data.length == undefined){
 //    }else{

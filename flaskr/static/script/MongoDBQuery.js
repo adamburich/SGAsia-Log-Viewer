@@ -1,5 +1,5 @@
 //var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+//var url = "mongodb://localhost:27017/";
 
 function sendMongoDBQuery_ON_HOLD(){
 //    let text = document.getElementById("mongoQuery");
@@ -17,19 +17,23 @@ function sendMongoDBQuery_ON_HOLD(){
 }
 
 function sendMongoDBQuery(){
-var settings = {
-  "url": "https://6p5txxhkagnbr3dxk54iz4n3cu0pvjub.lambda-url.ap-southeast-1.on.aws/",
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "data": JSON.stringify({
-    "statement.context.extensions.http://gamestrax&46;com/extensions/session": "6bf76a62"
-  }),
-};
+//To test use:
+//{"statement.context.extensions.http://gamestrax&46;com/extensions/session": "6bf76a62"}
+//in MongoDB Query field
+    let query = document.getElementById("mongoQuery").value;
+    var settings = {
+      "url": "https://6p5txxhkagnbr3dxk54iz4n3cu0pvjub.lambda-url.ap-southeast-1.on.aws/",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": query,
+    };
 
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
+    $.ajax(settings).done(function (response) {
+          document.getElementById("hidden_log_div").innerHTML = response;
+          const tree = jsonview.create(response);
+          jsonview.render(tree, document.querySelector('.query-result-root'));
+    });
 }

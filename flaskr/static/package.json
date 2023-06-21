@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@pgrabovets/json-view": "^2.7.1",
+    "cors": "^2.8.5",
     "mongodb": "^5.5.0"
   }
 }
